@@ -1,15 +1,16 @@
 const Potion = require('../lib/Potion');
 
-jest.mock('../lib/Potion');
+test('creates a health potion object', () => {
+    const potion = new Potion('health');
 
-console.log(new Potion());
+    expect(potion.name).toBe('health');
+    expect(potion.value).toEqual(expect.any(Number));
+});
 
-test('uses a potion from inventory', () => {
-    const player = new Player('Dave');
-    player.inventory = [new Potion(), new Potion(), new Potion()];
-    const oldCount = player.inventory.length;
+test('creates a random potion object', () => {
+    const potion = new Potion();
 
-    player.usePotion(1);
-
-    expect(player.inventory.length).toBeLessThan(oldCount);
+    expect(potion.name).toEqual(expect.any(String));
+    expect(potion.name.length).toBeGreaterThan(0);
+    expect(potion.value).toEqual(expect.any(Number));
 });
