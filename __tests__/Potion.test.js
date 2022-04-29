@@ -4,17 +4,12 @@ jest.mock('../lib/Potion');
 
 console.log(new Potion());
 
-test('creates a health potion object', () => {
-    const potion = new Potion('health');
+test('uses a potion from inventory', () => {
+    const player = new Player('Dave');
+    player.inventory = [new Potion(), new Potion(), new Potion()];
+    const oldCount = player.inventory.length;
 
-    expect(potion.name).toBe('health');
-    expect(potion.value).toEqual(expect.any(Number));
-});
+    player.usePotion(1);
 
-test('creates a random potion object', () => {
-    const potion = new Potion();
-
-    expect(potion.name).toEqual(expect.any(String));
-    expect(potion.name.length).toBeGreaterThan(0);
-    expect(potion.value).toEqual(expect.any(Number));
+    expect(player.inventory.length).toBeLessThan(oldCount);
 });
